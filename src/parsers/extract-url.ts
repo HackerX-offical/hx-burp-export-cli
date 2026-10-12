@@ -1,5 +1,6 @@
 export function extractItemUrl(it: Record<string, unknown>): string | undefined {
-  const url = it.url ?? it['@_url'] ?? (it.request as Record<string, unknown> | undefined)?.['@_url'];
+  const url =
+    it.url ?? it['@_url'] ?? (it.request as Record<string, unknown> | undefined)?.['@_url'];
   return url ? String(url) : undefined;
 }
 
