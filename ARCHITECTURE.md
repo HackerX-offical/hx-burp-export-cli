@@ -1,19 +1,23 @@
 # hx-burp-export-cli architecture
 
-Burp Suite sitemap export parser → scoped hosts and URLs for CLI pipelines
+Burp Suite XML export parser for host list extraction.
 
 ## Layout
 
 ```
-src/           # TypeScript sources
+src/
+  cli.ts
+  types.ts
+  burp.ts                 # Re-exports
+  parsers/                # XML → BurpItem[]
+  analysis/               # uniqueHosts, summarize
+  reporters/              # JSON / line output
+  utils/safe-url.ts
+tests/burp.test.ts
 ```
 
 ## Develop
 
 ```bash
-npm install
-npm run build
-npm test
+npm install && npm run build && npm test
 ```
-
-See [SECURITY.md](./SECURITY.md) for authorized use.

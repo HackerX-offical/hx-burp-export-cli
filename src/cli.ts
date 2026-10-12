@@ -2,6 +2,8 @@
 import { writeFileSync } from 'node:fs';
 import { Command } from 'commander';
 import { parseBurpXml, uniqueHosts } from './burp.js';
+import { summarizeBurpItems } from './analysis/summarize-items.js';
+import { toHostsJson } from './reporters/json.js';
 
 const program = new Command();
 program.name('hx-burp').description('Burp export → CLI host lists').version('1.0.0');
@@ -14,7 +16,8 @@ program
   .action((xml: string, opts: { out?: string; json?: boolean }) => {
     const items = parseBurpXml(xml);
     const hosts = uniqueHosts(items);
-    if (opts.json) console.log(JSON.stringify({ hosts, count: items.length }, null, 2));
+    const summary = summarizeBurpItems(items);
+    if (opts.json) console.log(toHostsJson(hosts, items, summary));
     else hosts.forEach((h) => console.log(h));
     if (opts.out) writeFileSync(opts.out, hosts.join('\n') + '\n', 'utf8');
   });
