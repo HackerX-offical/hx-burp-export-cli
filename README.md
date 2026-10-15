@@ -20,7 +20,7 @@ Burp headless.
 ## Install
 
 ```bash
-git clone https://github.com/HackerX-offical/hx-burp-export-cli.git
+git clone https://github.com/HackerX-official/hx-burp-export-cli.git
 cd hx-burp-export-cli
 npm install
 npm run build
